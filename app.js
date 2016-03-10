@@ -356,7 +356,7 @@ function initConfig(){
     recognition.onresult = function(event) {
       recognized = event.results[event.results.length-1][0].transcript;
     };   
-    console.log("initiated");
+    console.log("app initiated");
   }
   catch(e){
   }
