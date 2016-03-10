@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Samantha</title>
+  <link rel="shortcut icon" type="image/png" href="logo.png"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="firebase.js"></script>
+  <script type="text/javascript" src="moment.min.js"></script>
+  <script type="text/javascript" src="lodash.min.js"></script>
+  
+  <!--<script type="text/javascript" src="bootstrap3-typeahead.min.js"></script>-->
+  <!--[if IE 9]>
+  <script type="text/javascript" src="jquery.xdomainrequest.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="app.js"></script>
+  <script>
+   // if (!window.chrome) alert("Please use the latest version of Chrome for this app!");
+   if (!getQueryParam("channel")) location = "?channel=test";
+  </script>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top recording-alert">Press <strong>Ctrl + M</strong> to stop. Or it will stop automatically after you finish speaking</nav>
+    <div class="container-fluid" id="main-container"></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container-fluid">
+        <div class="row">
+          <form id="input-form" class="col-md-10 bottom-item">
+            <input type="text" class="form-control" id="input" placeholder="Type and hit Enter" />
+          </form>
+          <div class="col-md-2 bottom-item">
+              <select class="form-control lang-setting" id="lang">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="es">Español</option>
+                <option value="pt">Português</option>
+                <option value="it">Italiano</option>
+                <option value="sv">Svenska</option>
+                <option value="ja">日本語</option>
+                <option value="zh-CN">中文</option>
+                <option value="ru">Россия</option>
+                <option value="no">Norsk</option>
+              </select>
+          </div>
+        </div>
+      </div>
+    </nav> 
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-74423673-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>
