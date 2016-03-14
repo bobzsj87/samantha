@@ -63,6 +63,7 @@ function startSession(){
       var message;
 
       translate(data.text, config.lang, function(t){
+
         if (name == config.name){
           showMessage('message', t, data.text);
         }
@@ -249,7 +250,6 @@ function submitInput(text){
   text = (text||$('#input').val()).trim();
 
   if (!text.length) return false;
-  
 
   if (config.context){
     if (config.context == "initName") {
@@ -432,14 +432,14 @@ window.onblur = function () {
 
 function translate(text, lang, cb){
 
-  $.getJSON('https://api.efjourney.com/translate?q='+encodeURIComponent(text)+"&lang="+lang+"&engine="+config.engine, function(translated){
+  $.get('https://api.efjourney.com/translate?q='+encodeURIComponent(text)+"&lang="+lang+"&engine="+config.engine, function(translated){
     cb(translated);
   });
 }
 
 function detect(text, cb){
 
-  $.getJSON('https://api.efjourney.com/translate?action=detect&q='+encodeURIComponent(text)+"&lang="+lang+"&engine="+config.engine, function(detected){
+  $.get('https://api.efjourney.com/translate?action=detect&q='+encodeURIComponent(text)+"&engine="+config.engine, function(detected){
     cb(detected);
   });
 }
