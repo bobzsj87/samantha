@@ -26,7 +26,7 @@ function showMessage(type, msg, original, name, time){
 
     originalDom.one('click', function(){
       translate(original, "en", function(t){
-        originalDom.append(" ("+t.translatedText+")");
+        originalDom.append(" ("+t+")");
       });
        
     })
@@ -64,10 +64,10 @@ function startSession(){
 
       translate(data.text, config.lang, function(t){
         if (name == config.name){
-          showMessage('message', t.translatedText, data.text);
+          showMessage('message', t, data.text);
         }
         else{
-          showMessage('response', t.translatedText, data.text, name, moment(data.time).format("LT, ddd"));
+          showMessage('response', t, data.text, name, moment(data.time).format("LT, ddd"));
           statRef.child("read/"+config.lang).transaction(function(current) {
             if (current == null) return 1;
             return current+1;
@@ -193,14 +193,14 @@ var Command = {
       var q = cmd.args.join(" ");
       translate(q, config.lang, function(t){
         // show my own word's translated message 
-        showMessage('message', "Samantha, "+t.translatedText, q);
+        showMessage('message', "Samantha, "+t, q);
 
         translate(q, "en", function(t){
           // show English to Samantha
-          $.get('https://api.efjourney.com/?q='+encodeURIComponent(t.translatedText)+"&sessionId=firebaseapp-"+encodeURIComponent(config.name)+"-"+encodeURIComponent(config.channel), function(feedback){
+          $.get('https://api.efjourney.com/?q='+encodeURIComponent(t)+"&sessionId=firebaseapp-"+encodeURIComponent(config.name)+"-"+encodeURIComponent(config.channel), function(feedback){
             // translate English from Samantha to my config.lang
             translate(feedback, config.lang, function(t){
-              showMessage('response', t.translatedText, feedback, "Samantha");
+              showMessage('response', t, feedback, "Samantha");
             })
           });
         })
@@ -267,7 +267,7 @@ function submitInput(text){
       messagesRef.push({name:config.name, text:text, time: Firebase.ServerValue.TIMESTAMP});
 
       detect(text, function(d){
-        statRef.child("write/"+d.language).transaction(function(current) {
+        statRef.child("write/"+d).transaction(function(current) {
           if (current == null) return 1;
           return current+1;
         })
@@ -316,7 +316,7 @@ function initConfig(){
 
   config.channel = getQueryParam("channel"); 
   config.name = getCookie('name');
-
+  config.engine = getQueryParam("engine") || "google";
 
     // check notification permission
   try{
@@ -432,14 +432,14 @@ window.onblur = function () {
 
 function translate(text, lang, cb){
 
-  $.getJSON('https://api.efjourney.com/translate?q='+encodeURIComponent(text)+"&lang="+lang, function(translated){
+  $.getJSON('https://api.efjourney.com/translate?q='+encodeURIComponent(text)+"&lang="+lang+"&engine="+config.engine, function(translated){
     cb(translated);
   });
 }
 
 function detect(text, cb){
 
-  $.getJSON('https://api.efjourney.com/translate?action=detect&q='+encodeURIComponent(text)+"&lang="+lang, function(detected){
+  $.getJSON('https://api.efjourney.com/translate?action=detect&q='+encodeURIComponent(text)+"&lang="+lang+"&engine="+config.engine, function(detected){
     cb(detected);
   });
 }
