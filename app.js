@@ -446,6 +446,7 @@ function detect(text, cb){
 
 
 function nonTranslate(text){
+  if (config.engine == "yandex") return text;
   return text.replace(/\[\[/g, '<span class="notranslate">').replace(/\]\]/g, "</span>");
 }
 
