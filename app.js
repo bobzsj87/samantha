@@ -14,7 +14,7 @@ function showMessage(type, msg, original, name, time){
   name && toApp.append('<span>'+name+'</span>');
   time && toApp.append('<span>, '+time+'</span>');
 
-  var mainMessage = $('<p class="main-message">'+msg+'</p>');
+  var mainMessage = $('<p class="main-message">'+marked(msg)+'</p>');
   toApp.append(mainMessage);
 
   if (original){
