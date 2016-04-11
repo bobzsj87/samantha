@@ -14,14 +14,14 @@ function showMessage(type, msg, original, name, time){
   name && toApp.append('<span>'+name+'</span>');
   time && toApp.append('<span>, '+time+'</span>');
 
-  var mainMessage = $('<p class="main-message">'+marked(msg)+'</p>');
+  var mainMessage = $('<div class="main-message">'+marked(msg)+'</div>');
   toApp.append(mainMessage);
 
   if (original){
     mainMessage.click(function(){
       $(this).siblings(".original").toggle();
     })
-    var originalDom = $('<p class="original">'+original+'</p>');
+    var originalDom = $('<div class="original">'+original+'</div>');
     if (!showAll) originalDom.hide();
 
     originalDom.one('click', function(){
