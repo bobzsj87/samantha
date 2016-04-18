@@ -189,26 +189,26 @@ var Command = {
     },
     help:"/voice languageCode: set voice recognition language code, which can be en, fr, de, etc..."
   },
-  s: {
-    run: function(cmd){
-      var q = cmd.args.join(" ");
-      translate(q, config.lang, function(t){
-        // show my own word's translated message 
-        showMessage('message', "Samantha, "+t, q);
+  // s: {
+  //   run: function(cmd){
+  //     var q = cmd.args.join(" ");
+  //     translate(q, config.lang, function(t){
+  //       // show my own word's translated message 
+  //       showMessage('message', "Samantha, "+t, q);
 
-        translate(q, "en", function(t){
-          // show English to Samantha
-          $.get('https://api.efjourney.com/?q='+encodeURIComponent(t)+"&sessionId=firebaseapp-"+encodeURIComponent(config.name)+"-"+encodeURIComponent(config.channel), function(feedback){
-            // translate English from Samantha to my config.lang
-            translate(feedback, config.lang, function(t){
-              showMessage('response', t, feedback, "Samantha");
-            })
-          });
-        })
-      })
-    },
-    help:"/s any language: talk to Samantha. Like: /s how are you?"
-  },
+  //       translate(q, "en", function(t){
+  //         // show English to Samantha
+  //         $.get('https://api.efjourney.com/?q='+encodeURIComponent(t)+"&sessionId=firebaseapp-"+encodeURIComponent(config.name)+"-"+encodeURIComponent(config.channel), function(feedback){
+  //           // translate English from Samantha to my config.lang
+  //           translate(feedback, config.lang, function(t){
+  //             showMessage('response', t, feedback, "Samantha");
+  //           })
+  //         });
+  //       })
+  //     })
+  //   },
+  //   help:"/s any language: talk to Samantha. Like: /s how are you?"
+  // },
   stat: {
     run: function(cmd){
       var toSee = config.name
